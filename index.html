@@ -186,7 +186,7 @@
         .curriculum-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
         .curriculum-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 
-        /* ----- COMMUNITY & REVIEWS SECTION (Replaced Studio Location) ----- */
+        /* ----- COMMUNITY & REVIEWS SECTION ----- */
         #community {
             background: linear-gradient(to right, rgba(21, 23, 30, 0.9), rgba(10, 11, 13, 0.95)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
             border-radius: 30px; border: 1px solid rgba(212, 175, 55, 0.2); padding: 80px 5%; margin-top: 50px; margin-bottom: 50px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
@@ -250,26 +250,84 @@
 
         footer { text-align: center; padding: 40px; background-color: #050505; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 2; }
 
+
         /* =========================================
-           MOBILE RESPONSIVENESS (MEDIA QUERIES) 
+           MOBILE RESPONSIVENESS - 10000% FIXED
            ========================================= */
         @media (max-width: 992px) {
-            .hero-content, .contact-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-images-container { margin-top: 40px; }
+            .hero-content, .contact-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+            .hero-images-container { margin-top: 20px; }
             .nav-links { display: none; }
             .info-list li { justify-content: center; }
-            
             .curriculum-grid { grid-template-columns: 1fr; } 
             .ig-grid { grid-template-columns: 1fr; }
             .social-grid { grid-template-columns: 1fr; }
         }
 
+        /* Targets Tablets and Mobile Phones */
         @media (max-width: 768px) {
-            section { padding: 80px 5%; }
-            .hero-text h1 { font-size: 3rem; }
-            .hero-text h2 { font-size: 1.2rem; }
-            .section-header h2 { font-size: 2.2rem; }
-            .about-card { padding: 30px; }
+            /* General Section Sizing */
+            section { padding: 60px 5%; }
+            #home.hero { padding: 100px 5% 40px; }
+            
+            /* Typography Scaling */
+            .logo { font-size: 20px; }
+            .hero-text h1 { font-size: 2.5rem; margin-bottom: 10px; }
+            .hero-text h2 { font-size: 1.1rem; margin-bottom: 15px; }
+            .hero-text p { font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; }
+            
+            .section-header { margin-bottom: 40px; }
+            .section-header h2 { font-size: 2rem; margin-bottom: 10px; }
+            .section-header p.slogan { font-size: 1rem; }
+            
+            /* Buttons */
+            .btn-primary { padding: 14px 30px; font-size: 0.85rem; letter-spacing: 1px; }
+            .btn-map { padding: 12px 25px; font-size: 0.95rem; }
+
+            /* Images Shrink For Mobile */
+            .hero-images-container { height: 320px; }
+            .img-back { width: 80%; height: 240px; }
+            .img-front { width: 75%; height: 200px; }
+
+            /* Cards & Padding Scaling */
+            .about-card { padding: 25px; border-left: 3px solid var(--accent-gold); }
+            .about-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+            .about-card p { font-size: 0.95rem; line-height: 1.6; }
+
+            .curriculum-card { padding: 25px 20px; }
+            .curriculum-card i { font-size: 2.5rem; margin-bottom: 15px; }
+            .curriculum-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+            
+            /* Community Box Mobile Fix */
+            #community { padding: 40px 5%; margin-top: 30px; margin-bottom: 30px; border-radius: 20px; }
+            .contact-text h3 { font-size: 1.8rem; }
+            .contact-text p { font-size: 0.95rem; }
+            .info-list li { font-size: 0.95rem; }
+            .phone-highlight { font-size: 1.1rem; }
+            .map-card { padding: 25px 15px; }
+            .map-icon { font-size: 3rem; }
+
+            /* Media Showcase Mobile Fixes */
+            .media-category-title { font-size: 1.3rem; margin-bottom: 15px; }
+            .yt-showcase { height: 250px; margin-bottom: 40px; }
+            .yt-showcase h3 { font-size: 1.5rem; }
+            .play-btn { width: 60px; height: 60px; font-size: 20px; }
+            
+            .ig-grid { gap: 20px; margin-bottom: 40px; }
+            .ig-reel { height: 320px; padding: 15px; }
+            .ig-play { font-size: 40px; }
+
+            .fb-post { padding: 20px; }
+            .fb-text { font-size: 0.95rem; line-height: 1.6; }
+            .fb-avatar { width: 40px; height: 40px; font-size: 18px; }
+
+            /* Connect Mobile Fix */
+            .social-grid { gap: 20px; }
+            .social-card { padding: 25px 15px; }
+            .social-card i.main-icon { font-size: 2.5rem; margin-bottom: 10px; }
+            .social-card h3 { font-size: 1.3rem; }
+            .social-id-text { font-size: 0.9rem; padding: 5px 15px; margin: 10px 0; }
+            .social-direct-link { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -497,7 +555,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Simon Joseph | Music Matters & Accord School | Made By Charith </p>
+        <p>&copy; 2026 Simon Joseph | Music Matters & Accord School. All rights reserved.</p>
     </footer>
 
 </body>
