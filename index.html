@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Joseph | Music Matters & Accord School</title>
+    
+    <!-- New Musician-Focused Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- JavaScript to FIX Auto-Scrolling Issue -->
+    <script>
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
+    </script>
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg-dark: #0a0b0d;
+            --bg-card: #15171e;
+            --bg-lighter: #1e212b;
+            --accent-gold: #d4af37;
+            --text-main: #f8f9fa;
+            --text-muted: #a0a4b0;
+            --glow-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* ----- SITE WIDE BACKGROUND & ANIMATION (FIXED) ----- */
+        /* The background gradient now covers the entire site behind everything */
+        .site-background {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle at center, #1a1c23 0%, #0a0b0d 100%);
+            z-index: -2;
+        }
+
+        /* The floating notes now persist through the entire scroll */
+        .floating-notes-container {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .music-note {
+            position: absolute;
+            color: rgba(212, 175, 55, 0.12);
+            font-size: 2rem;
+            bottom: -100px;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Added more notes for full-screen effect */
+        .note-1 { left: 10%; animation-duration: 12s; animation-delay: 0s; font-size: 2.5rem; }
+        .note-2 { left: 25%; animation-duration: 18s; animation-delay: 2s; font-size: 3.5rem; }
+        .note-3 { left: 40%; animation-duration: 15s; animation-delay: 5s; }
+        .note-4 { left: 60%; animation-duration: 20s; animation-delay: 1s; font-size: 3rem; }
+        .note-5 { left: 75%; animation-duration: 14s; animation-delay: 4s; }
+        .note-6 { left: 85%; animation-duration: 17s; animation-delay: 3s; font-size: 2rem; }
+        .note-7 { left: 50%; animation-duration: 22s; animation-delay: 7s; font-size: 4rem; }
+
+        /* ----- NAVIGATION ----- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(10, 11, 13, 0.95);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo { font-size: 24px; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 3px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--accent-gold); }
+
+        /* ----- HERO SECTION ----- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 8% 50px;
+            position: relative;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, #d4af37);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase;
+        }
+
+        .hero-text h2 { font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 20px; letter-spacing: 1px; text-transform: uppercase; }
+        .hero-text p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 40px; line-height: 1.9; }
+
+        .btn-primary {
+            display: inline-block; padding: 18px 45px; background-color: var(--accent-gold); color: #000;
+            font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            border-radius: 50px; transition: all 0.4s ease; border: none; cursor: pointer; box-shadow: var(--glow-shadow);
+        }
+        .btn-primary:hover { background-color: #fff; transform: translateY(-5px); box-shadow: 0 15px 30px rgba(255,255,255,0.2); }
+
+        .hero-images-container { position: relative; height: 500px; width: 100%; }
+        .hero-img { position: absolute; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.9); transition: all 0.5s ease; object-fit: cover; }
+        .img-back { width: 75%; height: 380px; top: 0; right: 0; border: 1px solid rgba(255,255,255,0.05); filter: grayscale(30%); }
+        .img-front { width: 70%; height: 320px; bottom: 0; left: 0; border: 3px solid var(--accent-gold); }
+        .hero-images-container:hover .img-back { transform: translate(15px, -15px) rotate(2deg); filter: grayscale(0%); }
+        .hero-images-container:hover .img-front { transform: translate(-15px, 15px) rotate(-2deg); }
+
+        /* ----- GENERAL SECTIONS ----- */
+        section { padding: 100px 8%; max-width: 1400px; margin: 0 auto; position: relative; z-index: 2; }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-header h2 { font-size: 3rem; margin-bottom: 15px; text-transform: uppercase; }
+        .section-header p.slogan { font-size: 1.2rem; color: var(--accent-gold); font-style: italic; margin-bottom: 20px; }
+        .section-header .divider { width: 100px; height: 4px; background: linear-gradient(90deg, transparent, var(--accent-gold), transparent); margin: 0 auto; }
+
+        /* ----- FULL BIOGRAPHY & ABOUT SECTION ----- */
+        .about-card {
+            background-color: rgba(21, 23, 30, 0.85); /* Slight transparency so notes peek through */
+            padding: 50px; border-radius: 15px; border-left: 5px solid var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+        .about-card h3 { font-size: 2rem; margin-bottom: 20px; color: var(--text-main); }
+        .about-card p { margin-bottom: 20px; font-size: 1.15rem; color: var(--text-muted); text-align: justify; line-height: 1.9; }
+
+        /* ----- CURRICULUM / LESSONS (UI FIXED FOR 3 IN A ROW) ----- */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* FORCES exactly 3 equal columns */
+            gap: 25px; /* Slightly tighter gap to fit comfortably */
+        }
+
+        .curriculum-card {
+            background-color: rgba(21, 23, 30, 0.85);
+            padding: 40px 25px; /* Reduced padding to make the box smaller and fit */
+            border-radius: 15px; text-align: center; transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(5px);
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+        }
+
+        .curriculum-card:hover { transform: translateY(-15px); background-color: var(--bg-lighter); box-shadow: var(--glow-shadow); border-color: var(--accent-gold); }
+        .curriculum-card i { font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 25px; }
+        .curriculum-card h3 { font-size: 1.5rem; margin-bottom: 15px; } /* Smaller text to fit row */
+        .curriculum-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+        /* ----- STUDIO LOCATION ----- */
+        #location {
+            background: linear-gradient(to right, rgba(21, 23, 30, 0.9), rgba(10, 11, 13, 0.95)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            border-radius: 30px; border: 1px solid rgba(212, 175, 55, 0.2); padding: 80px 5%; margin-top: 50px; margin-bottom: 50px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .contact-text h3 { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px; }
+        .contact-text p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 30px; }
+        .info-list { list-style: none; margin-bottom: 40px; }
+        .info-list li { font-size: 1.15rem; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .info-list i { color: var(--accent-gold); font-size: 1.5rem; width: 30px; text-align: center; }
+        .phone-highlight { color: #fff; font-weight: 700; font-size: 1.3rem; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+
+        .map-card { background-color: rgba(255,255,255,0.03); border-radius: 20px; padding: 40px; text-align: center; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        .map-icon { font-size: 5rem; color: var(--accent-gold); margin-bottom: 20px; animation: pulseGlow 2s infinite; }
+        @keyframes pulseGlow {
+            0% { text-shadow: 0 0 0 rgba(212, 175, 55, 0.4); transform: scale(1); }
+            50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8); transform: scale(1.05); }
+            100% { text-shadow: 0 0 0 rgba(212, 175, 55, 0.4); transform: scale(1); }
+        }
+        .btn-map { display: inline-block; margin-top: 20px; padding: 15px 35px; background-color: var(--accent-gold); color: #000; font-weight: 700; border-radius: 30px; font-size: 1.1rem; transition: all 0.3s ease; }
+        .btn-map:hover { background-color: #fff; transform: translateY(-3px); }
+
+        /* ----- MEDIA SHOWCASE ----- */
+        .media-category-title { font-size: 1.8rem; color: var(--accent-gold); margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .yt-showcase { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover; height: 400px; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid rgba(212, 175, 55, 0.3); margin-bottom: 60px; transition: transform 0.3s ease; }
+        .yt-showcase:hover { transform: scale(1.02); box-shadow: var(--glow-shadow); }
+        .play-btn { width: 80px; height: 80px; background-color: #ff0000; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; color: white; margin-bottom: 20px; cursor: pointer; border: none; transition: all 0.3s ease; padding-left: 5px; }
+        .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(255, 0, 0, 0.6); }
+
+        .ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 60px; }
+        .ig-reel { height: 450px; border-radius: 15px; position: relative; background-size: cover; background-position: center; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: space-between; padding: 20px; transition: transform 0.3s ease; }
+        .ig-reel:hover { transform: translateY(-10px); border-color: #E1306C; box-shadow: 0 15px 30px rgba(225, 48, 108, 0.2); }
+        .ig-reel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.9)); border-radius: 15px; z-index: 1; }
+        .ig-content { position: relative; z-index: 2; }
+        .ig-header { display: flex; justify-content: space-between; align-items: center; }
+        .ig-icon { color: #E1306C; font-size: 24px; }
+        .ig-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: rgba(255,255,255,0.8); z-index: 2; cursor: pointer; transition: color 0.3s ease; }
+        .ig-play:hover { color: #fff; }
+        .ig-reel-text { color: white; font-size: 0.95rem; }
+
+        .fb-post { background-color: rgba(21, 23, 30, 0.85); backdrop-filter: blur(5px); border-radius: 15px; padding: 30px; max-width: 800px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.05); }
+        .fb-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .fb-avatar { width: 50px; height: 50px; background-color: var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; color: #000; }
+        .fb-name { font-weight: 700; font-size: 1.1rem; color: #fff; font-family: 'Montserrat', sans-serif;}
+        .fb-time { font-size: 0.85rem; color: var(--text-muted); }
+        .fb-text { margin-bottom: 20px; font-size: 1.05rem; }
+        .fb-btn { background-color: #1877F2; color: white; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 10px; font-family: 'Poppins', sans-serif; transition: background 0.3s ease; }
+        .fb-btn:hover { background-color: #0d65d9; }
+
+        /* ----- CONNECT LINKS ----- */
+        .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .social-card { background-color: rgba(21, 23, 30, 0.85); backdrop-filter: blur(5px); padding: 40px 30px; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s ease; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; }
+        .social-card:hover { border-color: var(--accent-gold); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        .social-card i.main-icon { font-size: 4rem; margin-bottom: 20px; }
+        .social-card .fa-instagram { color: #E1306C; }
+        .social-card .fa-facebook { color: #1877F2; }
+        .social-card .fa-youtube { color: #FF0000; }
+        .social-id-text { font-size: 1.1rem; font-weight: 700; color: var(--accent-gold); margin: 15px 0; background-color: rgba(212, 175, 55, 0.1); display: inline-block; padding: 8px 20px; border-radius: 30px; letter-spacing: 1px; }
+        .social-direct-link { color: var(--text-muted); display: block; margin-top: 15px; text-decoration: none; font-size: 0.9rem; word-wrap: break-word; width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s ease; }
+        .social-direct-link:hover { color: var(--accent-gold); border-color: var(--accent-gold); }
+
+        footer { text-align: center; padding: 40px; background-color: #050505; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 2; }
+
+        /* =========================================
+           MOBILE RESPONSIVENESS (MEDIA QUERIES) 
+           ========================================= */
+        @media (max-width: 992px) {
+            .hero-content, .contact-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-images-container { margin-top: 40px; }
+            .nav-links { display: none; }
+            .info-list li { justify-content: center; }
+            
+            /* Stacks the 3-column rows perfectly on tablets and mobile phones */
+            .curriculum-grid { grid-template-columns: 1fr; } 
+            .ig-grid { grid-template-columns: 1fr; }
+            .social-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 80px 5%; }
+            .hero-text h1 { font-size: 3rem; }
+            .hero-text h2 { font-size: 1.2rem; }
+            .section-header h2 { font-size: 2.2rem; }
+            .about-card { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This div creates the persistent background behind everything -->
+    <div class="site-background"></div>
+
+    <!-- These notes will float through the ENTIRE website as you scroll -->
+    <div class="floating-notes-container">
+        <i class="fa-solid fa-music music-note note-1"></i>
+        <i class="fa-solid fa-guitar music-note note-2"></i>
+        <i class="fa-solid fa-compact-disc music-note note-3"></i>
+        <i class="fa-solid fa-music music-note note-4"></i>
+        <i class="fa-solid fa-headphones music-note note-5"></i>
+        <i class="fa-solid fa-play music-note note-6"></i>
+        <i class="fa-solid fa-drum music-note note-7"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Simon Joseph</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#curriculum">Lessons</a>
+            <a href="#location">Studio</a>
+            <a href="#media">Media</a>
+            <a href="#connect">Connect</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Elevating Musical Artistry.</h1>
+                <h2>Founder of Music Matters & Elite Educator</h2>
+                <p>"Where Passion Meets Precision." Simon Joseph is the driving force behind the renowned band <strong>Music Matters</strong> and a highly respected instructor at <strong>Accord School</strong>. By blending real-world stage performance with rigorous academic technique, he turns pure passion into absolute virtuosity.</p>
+                <button onclick="document.getElementById('about').scrollIntoView();" class="btn-primary">Discover The Maestro</button>
+            </div>
+            
+            <div class="hero-images-container">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Shadowed Guitar" class="hero-img img-back">
+                <img src="https://images.unsplash.com/photo-1552422535-c45813c61732?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Keyboard Playing" class="hero-img img-front">
+            </div>
+        </div>
+    </section>
+
+    <!-- Biography / About Section -->
+    <section id="about">
+        <div class="section-header">
+            <h2>The Maestro's Journey</h2>
+            <p class="slogan">"Simon Joseph doesn't just teach music; he cultivates artists."</p>
+            <div class="divider"></div>
+        </div>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>A Legacy of Musical Excellence</h3>
+                <p>Simon Joseph is more than just a musician; he is an institution in music education. With a profound understanding of harmonic theory, rhythm, and instrumental mechanics, he has dedicated his life to the pursuit of musical perfection. His expertise bridges the gap between classical foundational techniques and modern contemporary styles, making his approach incredibly versatile and highly sought after.</p>
+                <p>As a highly respected educator at <strong>Accord School</strong>, Sir Simon has profoundly impacted the school's cultural landscape. He is responsible for nurturing the raw talent of countless students, guiding them from their very first hesitant notes to performing confidently on grand stages. At Accord School, his music room is not just a classroom—it is a sanctuary for creativity, discipline, and artistic growth.</p>
+            </div>
+
+            <div class="about-card">
+                <h3>Teaching Philosophy & Vision</h3>
+                <p>Sir's teaching philosophy is rooted in the powerful belief that every student possesses a unique musical voice waiting to be discovered. He does not believe in a "one-size-fits-all" approach. Instead, whether a student is picking up the acoustic guitar to learn chords, shredding on an electric guitar, or exploring complex sonatas on the keyboard, he meticulously tailors his lesson plans to fit the individual's pace and ambition.</p>
+                <p>Beyond technical proficiency, Simon Joseph emphasizes ear training, improvisational skills, and stage presence. His students at Accord School are routinely prepared for school assemblies, high-stakes talent shows, and comprehensive musical grading exams, ensuring they are not just playing an instrument, but truly understanding the language of music.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section (FIXED: 3 IN A ROW) -->
+    <section id="curriculum">
+        <div class="section-header">
+            <h2>Curriculum & Expertise</h2>
+            <p class="slogan">Master the fundamentals. Command the stage.</p>
+            <div class="divider"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="curriculum-card">
+                <i class="fa-solid fa-guitar"></i>
+                <h3>Guitar Mastery</h3>
+                <p>Comprehensive training spanning Acoustic, Classical, and Electric guitar. From foundational open chords and rhythmic strumming to advanced fretboard navigation, fingerstyle techniques, and complex rock/metal solos.</p>
+            </div>
+
+            <div class="curriculum-card">
+                <i class="fa-solid fa-music"></i>
+                <h3>Keyboard & Piano</h3>
+                <p>Deep-dive instruction into piano mechanics. Students learn sight-reading, scale mastery, chord progressions, and independent hand coordination, bridging classical discipline with modern pop and jazz elements.</p>
+            </div>
+
+            <div class="curriculum-card">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>Accord School Support</h3>
+                <p>Exclusive mentorship for Accord School students. Dedicated preparation for school events, practical grading exams, band formations, and live performance coaching to build unbreakable stage confidence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Location & Contact Section -->
+    <section id="location">
+        <div class="contact-grid">
+            <div class="contact-text">
+                <h3>The Music Matters Studio</h3>
+                <p>Whether you are preparing for a massive stage performance, refining your technique for Accord School, or joining a jam session, the <strong>Music Matters</strong> studio is where the magic happens. Step into a world built for pure sound.</p>
+                
+                <ul class="info-list">
+                    <li><i class="fa-solid fa-building"></i> <strong>Location:</strong> Music Matters Studio</li>
+                    <li><i class="fa-solid fa-school"></i> <strong>Affiliation:</strong> Accord School Music Dept.</li>
+                    <li><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> <span class="phone-highlight">082407 07321</span></li>
+                </ul>
+            </div>
+            
+            <div class="map-card">
+                <i class="fa-solid fa-map-location-dot map-icon"></i>
+                <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Find Us on Google Maps</h4>
+                <p style="color: var(--text-muted); font-size: 1rem;">Click below to get instant directions directly to the Music Matters studio location.</p>
+                <a href="https://maps.app.goo.gl/pQRgFD6LinrbTUQN7" target="_blank" class="btn-map">
+                    <i class="fa-solid fa-location-arrow" style="margin-right: 8px;"></i> Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unified Media Showcase Section -->
+    <section id="media">
+        <div class="section-header">
+            <h2>The Maestro's Content</h2>
+            <p class="slogan">Watch the artistry unfold across the web.</p>
+            <div class="divider"></div>
+        </div>
+
+        <h3 class="media-category-title"><i class="fa-brands fa-youtube" style="color: #FF0000;"></i> Latest on YouTube</h3>
+        <div class="yt-showcase">
+            <button class="play-btn" onclick="window.open('https://youtube.com/@simonjosephstrat', '_blank')">
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <h3 style="color: white; font-size: 2rem;">Simon Joseph Strat</h3>
+            <p style="color: var(--accent-gold); margin-top: 10px; font-weight: 600;">Click to view full covers & solos</p>
+        </div>
+
+        <h3 class="media-category-title" style="margin-top: 80px;"><i class="fa-brands fa-instagram" style="color: #E1306C;"></i> Instagram Reels & Clips</h3>
+        <div class="ig-grid">
+            <div class="ig-reel" style="background-image: url('https://images.unsplash.com/photo-1605020420620-20c943cc4669?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                <div class="ig-content ig-header">
+                    <span style="color: white; font-weight: bold;">@simonj106</span>
+                    <i class="fa-brands fa-instagram ig-icon"></i>
+                </div>
+                <i class="fa-solid fa-play ig-play" onclick="window.open('https://www.instagram.com/simonj106', '_blank')"></i>
+                <div class="ig-content ig-reel-text"><p>Electric guitar solo practice at Accord School! 🎸🔥 #guitar #music</p></div>
+            </div>
+            
+            <div class="ig-reel" style="background-image: url('https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                <div class="ig-content ig-header">
+                    <span style="color: white; font-weight: bold;">@simonj106</span>
+                    <i class="fa-brands fa-instagram ig-icon"></i>
+                </div>
+                <i class="fa-solid fa-play ig-play" onclick="window.open('https://www.instagram.com/simonj106', '_blank')"></i>
+                <div class="ig-content ig-reel-text"><p>Warming up the keys for today's masterclass. 🎹✨ #keyboard #pianocover</p></div>
+            </div>
+
+            <div class="ig-reel" style="background-image: url('https://images.unsplash.com/photo-1516280440502-613ecf7823e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');">
+                <div class="ig-content ig-header">
+                    <span style="color: white; font-weight: bold;">@simonj106</span>
+                    <i class="fa-brands fa-instagram ig-icon"></i>
+                </div>
+                <i class="fa-solid fa-play ig-play" onclick="window.open('https://www.instagram.com/simonj106', '_blank')"></i>
+                <div class="ig-content ig-reel-text"><p>Acoustic fingerstyle sessions. Never stop learning! 🎶 #acoustic</p></div>
+            </div>
+        </div>
+
+        <h3 class="media-category-title" style="margin-top: 80px;"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i> Facebook Updates</h3>
+        <div class="fb-post">
+            <div class="fb-header">
+                <div class="fb-avatar"><i class="fa-solid fa-music"></i></div>
+                <div>
+                    <div class="fb-name">Simon Joseph</div>
+                    <div class="fb-time">Music Instructor • Accord School</div>
+                </div>
+            </div>
+            <div class="fb-text">
+                "Incredibly proud of my students at Accord School for their amazing performance this week. From learning basic chords to dominating the stage, the journey of music never ceases to amaze me. Looking forward to our next recital!" 🎸🎹
+            </div>
+            <button class="fb-btn" onclick="window.open('https://www.facebook.com/Simonj10/', '_blank')">
+                <i class="fa-brands fa-facebook-f"></i> View Official Page
+            </button>
+        </div>
+    </section>
+
+    <!-- Connect / Social Section -->
+    <section id="connect">
+        <div class="section-header">
+            <h2>Official Links & Profiles</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="social-grid">
+            <div class="social-card">
+                <i class="fa-brands fa-instagram main-icon"></i>
+                <h3>Instagram</h3>
+                <div class="social-id-text">ID: @simonj106</div>
+                <p style="color: var(--text-main); margin-bottom: 10px;">Follow for daily updates and clips.</p>
+                <a href="https://www.instagram.com/simonj106" target="_blank" class="social-direct-link">https://www.instagram.com/simonj106</a>
+            </div>
+
+            <div class="social-card">
+                <i class="fa-brands fa-facebook main-icon"></i>
+                <h3>Facebook</h3>
+                <div class="social-id-text">ID: Simonj10</div>
+                <p style="color: var(--text-main); margin-bottom: 10px;">Connect on the official FB page.</p>
+                <a href="https://www.facebook.com/Simonj10/" target="_blank" class="social-direct-link">https://www.facebook.com/Simonj10/</a>
+            </div>
+
+            <div class="social-card">
+                <i class="fa-brands fa-youtube main-icon"></i>
+                <h3>YouTube</h3>
+                <div class="social-id-text">ID: @simonjosephstrat</div>
+                <p style="color: var(--text-main); margin-bottom: 10px;">Subscribe for full covers.</p>
+                <a href="https://youtube.com/@simonjosephstrat" target="_blank" class="social-direct-link">https://youtube.com/@simonjosephstrat</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Simon Joseph | Music Matters & Accord School. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
