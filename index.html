@@ -56,7 +56,6 @@
         a { text-decoration: none; color: inherit; }
 
         /* ----- SITE WIDE BACKGROUND & ANIMATION (FIXED) ----- */
-        /* The background gradient now covers the entire site behind everything */
         .site-background {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -64,7 +63,6 @@
             z-index: -2;
         }
 
-        /* The floating notes now persist through the entire scroll */
         .floating-notes-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -88,7 +86,6 @@
             100% { transform: translateY(-110vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
-        /* Added more notes for full-screen effect */
         .note-1 { left: 10%; animation-duration: 12s; animation-delay: 0s; font-size: 2.5rem; }
         .note-2 { left: 25%; animation-duration: 18s; animation-delay: 2s; font-size: 3.5rem; }
         .note-3 { left: 40%; animation-duration: 15s; animation-delay: 5s; }
@@ -170,7 +167,7 @@
 
         /* ----- FULL BIOGRAPHY & ABOUT SECTION ----- */
         .about-card {
-            background-color: rgba(21, 23, 30, 0.85); /* Slight transparency so notes peek through */
+            background-color: rgba(21, 23, 30, 0.85); 
             padding: 50px; border-radius: 15px; border-left: 5px solid var(--accent-gold);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px;
             backdrop-filter: blur(5px);
@@ -178,29 +175,19 @@
         .about-card h3 { font-size: 2rem; margin-bottom: 20px; color: var(--text-main); }
         .about-card p { margin-bottom: 20px; font-size: 1.15rem; color: var(--text-muted); text-align: justify; line-height: 1.9; }
 
-        /* ----- CURRICULUM / LESSONS (UI FIXED FOR 3 IN A ROW) ----- */
-        .curriculum-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* FORCES exactly 3 equal columns */
-            gap: 25px; /* Slightly tighter gap to fit comfortably */
-        }
-
+        /* ----- CURRICULUM / LESSONS (3 IN A ROW) ----- */
+        .curriculum-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         .curriculum-card {
-            background-color: rgba(21, 23, 30, 0.85);
-            padding: 40px 25px; /* Reduced padding to make the box smaller and fit */
-            border-radius: 15px; text-align: center; transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(5px);
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            background-color: rgba(21, 23, 30, 0.85); padding: 40px 25px; border-radius: 15px; text-align: center; transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(5px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
         }
-
         .curriculum-card:hover { transform: translateY(-15px); background-color: var(--bg-lighter); box-shadow: var(--glow-shadow); border-color: var(--accent-gold); }
         .curriculum-card i { font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 25px; }
-        .curriculum-card h3 { font-size: 1.5rem; margin-bottom: 15px; } /* Smaller text to fit row */
+        .curriculum-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
         .curriculum-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 
-        /* ----- STUDIO LOCATION ----- */
-        #location {
+        /* ----- COMMUNITY & REVIEWS SECTION (Replaced Studio Location) ----- */
+        #community {
             background: linear-gradient(to right, rgba(21, 23, 30, 0.9), rgba(10, 11, 13, 0.95)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
             border-radius: 30px; border: 1px solid rgba(212, 175, 55, 0.2); padding: 80px 5%; margin-top: 50px; margin-bottom: 50px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
@@ -213,10 +200,10 @@
         .phone-highlight { color: #fff; font-weight: 700; font-size: 1.3rem; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
 
         .map-card { background-color: rgba(255,255,255,0.03); border-radius: 20px; padding: 40px; text-align: center; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
-        .map-icon { font-size: 5rem; color: var(--accent-gold); margin-bottom: 20px; animation: pulseGlow 2s infinite; }
+        .map-icon { font-size: 4rem; color: var(--accent-gold); margin-bottom: 20px; animation: pulseGlow 2s infinite; }
         @keyframes pulseGlow {
             0% { text-shadow: 0 0 0 rgba(212, 175, 55, 0.4); transform: scale(1); }
-            50% { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8); transform: scale(1.05); }
+            50% { text-shadow: 0 0 40px rgba(212, 175, 55, 1); transform: scale(1.1); }
             100% { text-shadow: 0 0 0 rgba(212, 175, 55, 0.4); transform: scale(1); }
         }
         .btn-map { display: inline-block; margin-top: 20px; padding: 15px 35px; background-color: var(--accent-gold); color: #000; font-weight: 700; border-radius: 30px; font-size: 1.1rem; transition: all 0.3s ease; }
@@ -272,7 +259,6 @@
             .nav-links { display: none; }
             .info-list li { justify-content: center; }
             
-            /* Stacks the 3-column rows perfectly on tablets and mobile phones */
             .curriculum-grid { grid-template-columns: 1fr; } 
             .ig-grid { grid-template-columns: 1fr; }
             .social-grid { grid-template-columns: 1fr; }
@@ -289,10 +275,10 @@
 </head>
 <body>
 
-    <!-- This div creates the persistent background behind everything -->
+    <!-- Persistent background -->
     <div class="site-background"></div>
 
-    <!-- These notes will float through the ENTIRE website as you scroll -->
+    <!-- Floating notes animation -->
     <div class="floating-notes-container">
         <i class="fa-solid fa-music music-note note-1"></i>
         <i class="fa-solid fa-guitar music-note note-2"></i>
@@ -310,7 +296,7 @@
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#curriculum">Lessons</a>
-            <a href="#location">Studio</a>
+            <a href="#community">Community</a>
             <a href="#media">Media</a>
             <a href="#connect">Connect</a>
         </div>
@@ -323,7 +309,7 @@
                 <h1>Elevating Musical Artistry.</h1>
                 <h2>Founder of Music Matters & Elite Educator</h2>
                 <p>"Where Passion Meets Precision." Simon Joseph is the driving force behind the renowned band <strong>Music Matters</strong> and a highly respected instructor at <strong>Accord School</strong>. By blending real-world stage performance with rigorous academic technique, he turns pure passion into absolute virtuosity.</p>
-                <button onclick="document.getElementById('about').scrollIntoView();" class="btn-primary">Discover The Maestro</button>
+                <button onclick="document.getElementById('community').scrollIntoView();" class="btn-primary">Join The Community</button>
             </div>
             
             <div class="hero-images-container">
@@ -356,7 +342,7 @@
         </div>
     </section>
 
-    <!-- Curriculum Section (FIXED: 3 IN A ROW) -->
+    <!-- Curriculum Section -->
     <section id="curriculum">
         <div class="section-header">
             <h2>Curriculum & Expertise</h2>
@@ -385,26 +371,26 @@
         </div>
     </section>
 
-    <!-- Studio Location & Contact Section -->
-    <section id="location">
+    <!-- Community & Reviews Section -->
+    <section id="community">
         <div class="contact-grid">
             <div class="contact-text">
-                <h3>The Music Matters Studio</h3>
-                <p>Whether you are preparing for a massive stage performance, refining your technique for Accord School, or joining a jam session, the <strong>Music Matters</strong> studio is where the magic happens. Step into a world built for pure sound.</p>
+                <h3>The Music Matters Community</h3>
+                <p>Simon Joseph's influence extends far beyond the classroom. As the founder of the band <strong>Music Matters</strong>, he brings together a passionate community of musicians and fans. Whether you are an Accord School student or a fan of live performances, your support means everything.</p>
                 
                 <ul class="info-list">
-                    <li><i class="fa-solid fa-building"></i> <strong>Location:</strong> Music Matters Studio</li>
+                    <li><i class="fa-solid fa-users"></i> <strong>Band:</strong> Music Matters Community</li>
                     <li><i class="fa-solid fa-school"></i> <strong>Affiliation:</strong> Accord School Music Dept.</li>
                     <li><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> <span class="phone-highlight">082407 07321</span></li>
                 </ul>
             </div>
             
             <div class="map-card">
-                <i class="fa-solid fa-map-location-dot map-icon"></i>
-                <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Find Us on Google Maps</h4>
-                <p style="color: var(--text-muted); font-size: 1rem;">Click below to get instant directions directly to the Music Matters studio location.</p>
+                <i class="fa-solid fa-star map-icon"></i>
+                <h4 style="font-size: 1.5rem; margin-bottom: 10px;">Support Us on Google</h4>
+                <p style="color: var(--text-muted); font-size: 1rem;">Read what our amazing community has to say, or leave a 5-star review to support the Music Matters band!</p>
                 <a href="https://maps.app.goo.gl/pQRgFD6LinrbTUQN7" target="_blank" class="btn-map">
-                    <i class="fa-solid fa-location-arrow" style="margin-right: 8px;"></i> Get Directions
+                    <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right: 8px;"></i> Read & Leave Reviews
                 </a>
             </div>
         </div>
